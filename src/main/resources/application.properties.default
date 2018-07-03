@@ -1,0 +1,4 @@
+database.driver = com.mysql.cj.jdbc.Driver
+database.url = jdbc:mysql://localhost:3306/outcome2?useSSL=false
+database.user = root
+database.password = aptx4869

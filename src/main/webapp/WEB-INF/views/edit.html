@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/layout.html}">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign Up</title>
+</head>
+<body>
+<section layout:fragment="content">
+    <div class="main-header">
+        <h2 class="title">Update Employee</h2>
+    </div>
+    <th:block th:if="${message}">
+        <div th:text="${message}" class="alert alert-success" role="alert">
+        </div>
+    </th:block>
+    <form th:object="${employee}" th:action="@{/__${employee.id}__/edit}" method="post">
+        <div class="form-group">
+            <div  th:if="${#fields.hasErrors()}" class="alert alert-danger" role="alert">
+                <div th:each="error : ${#fields.errors()}" th:text="${error}"></div>
+            </div>
+            <input type="hidden" name="id" th:value="*{id}" class="form-control">
+            <label>Name: </label>
+            <input name="name" type="text" th:value="*{name}" class="form-control">
+            <label>Gender: </label>
+            <select class="form-control" th:field="*{gender}">
+                <option value="1">Male</option>
+                <option value="0">Female</option>
+            </select>
+            <label>Birthday: </label>
+            <input type="date" th:field="*{birthday}" name="birthday" th:value="*{birthday}" class="form-control">
+            <label>Phone Number:</label>
+            <input type="text" name="phone" th:value="*{phone}" class="form-control">
+            <label>ID Card Number:</label>
+            <input type="text" name="idCard" th:field="*{idCard}"  th:value="*{idCard}" class="form-control">
+            <label>Email:</label>
+            <input type="text" name="email" th:value="*{email}" class="form-control">
+            <label>Address: </label>
+            <input type="text" name="address" th:value="*{address}" class="form-control">
+            <label>Group: </label>
+            <select class="form-control" th:field="*{group}" th:value="*{group}">
+                <option th:each="group:${groups}" th:value="${group.id}" th:text="${group.groupName}"></option>
+            </select>
+
+            <button type="submit" class="btn-outline-primary">Update</button>
+        </div>
+    </form>
+</section>
+
+</body>
+</html>

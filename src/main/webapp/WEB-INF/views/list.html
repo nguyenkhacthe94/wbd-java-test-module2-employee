@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/layout.html}">
+<head>
+    <meta charset="UTF-8">
+    <title>Employee list</title>
+</head>
+<body>
+<section layout:fragment="content">
+    <th:block th:if="${message}">
+        <div th:text="${message}" class="alert alert-success" role="alert">
+        </div>
+    </th:block>
+    <div class="main-header row">
+        <div class="col-md-6">
+            <h2 class="title">Employee list</h2>
+        </div>
+        <div class="col-md-6 text-right">
+            <a href="/create" class="btn btn-primary">Add new employee</a>
+        </div>
+    </div>
+
+    <table class="table">
+        <tr>
+            <th>Name</th>
+            <th>Birthday</th>
+            <th>Gender</th>
+            <th>Phone</th>
+            <th>Email</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+        <tr th:each="employee:${employeeList}">
+            <td th:text="${employee.name}"></td>
+            <td th:text="${employee.birthday}"></td>
+            <td th:text="${employee.gender}"></td>
+            <td th:text="${employee.phone}"></td>
+            <td th:text="${employee.email}"></td>
+            <td><a th:href="@{/__${employee.id}__/edit}">Edit</a></td>
+            <td><a th:href="@{/__${employee.id}__/delete}">Delete</a></td>
+        </tr>
+    </table>
+</section>
+</body>
+</html>
